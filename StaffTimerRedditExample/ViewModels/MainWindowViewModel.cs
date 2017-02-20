@@ -56,11 +56,8 @@ namespace StaffTimerRedditExample.ViewModels
         private void AddStaffMember(StaffMember staffMember)
         {                        
             ActiveStaffMembers.Add(staffMember);
-            staffMember.StartTimer();
-
-            //The reason for calling RaiseCanExecuteChanged is simply to update the UI so once a staff member is added, the Add button 
-            //becomes disabled through the "CanAddStaffMember" method.
-            AddStaffMemberCommand.RaiseCanExecuteChanged();
+            SelectedStaffMember = staffMember;
+            staffMember.StartTimer();                      
         }
 
         private bool CanAddStaffMember(StaffMember staffMember)
@@ -111,7 +108,8 @@ namespace StaffTimerRedditExample.ViewModels
                 //This will be called when the combobox selection is changed.
                 SetProperty(ref _selectedStaffMember, value);
 
-                //Again, we call RaiseCanExecuteChanged to enable or disable the Add button appropriately
+                //The reason for calling RaiseCanExecuteChanged is simply to update the UI so once a staff member is added, 
+                //the Add button becomes disabled through the "CanAddStaffMember" method.
                 AddStaffMemberCommand.RaiseCanExecuteChanged();
             }
         }

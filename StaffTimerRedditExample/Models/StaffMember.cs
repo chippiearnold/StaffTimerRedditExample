@@ -18,6 +18,7 @@ namespace StaffTimerRedditExample.Models
 
         public StaffMember()
         {
+            //Set up our delegate commands for the Start and Stop timer buttons in the UI
             StartTimerCommand = new DelegateCommand(StartTimer, CanStartTimer);
             StopTimerCommand = new DelegateCommand(StopTimer, CanStopTimer);
         }
@@ -38,6 +39,7 @@ namespace StaffTimerRedditExample.Models
 
         public void UpdateTimer()
         {            
+            //This is the method called every millisecond from the ViewModel, but only if the current instance of staff member's TimerActive=true
             TimeElapsed = DateTime.Now - DateStarted;
         }
 
@@ -54,6 +56,8 @@ namespace StaffTimerRedditExample.Models
         private void StopTimer()
         {
             TimerActive = false;
+
+            //Get our start and stop buttons to update their enabled status appropriately
             StartTimerCommand.RaiseCanExecuteChanged();
             StopTimerCommand.RaiseCanExecuteChanged();
         }
@@ -70,6 +74,9 @@ namespace StaffTimerRedditExample.Models
 
         public string Name { get; set; }
 
+
+        //Because we want our UI to update when the following properties are updated, we are using SetProperty method of PRISM
+        //This will handle INotifyPropertyChanged for us, and allow the bindings in the UI to update accordingly.
         public DateTime DateStarted
         {
             get { return _dateStarted; }
