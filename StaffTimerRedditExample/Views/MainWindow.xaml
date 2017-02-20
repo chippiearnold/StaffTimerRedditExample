@@ -37,8 +37,7 @@
         </Grid>
 
         <Grid Grid.Row="1" Margin="0,10,0,0">
-            <ListBox Grid.Row="0" 
-                     ItemsSource="{Binding ActiveStaffMembers}" 
+            <ListBox ItemsSource="{Binding ActiveStaffMembers}" 
                      HorizontalContentAlignment="Stretch">
                 
                 <ListBox.ItemContainerStyle>

@@ -30,6 +30,8 @@ namespace StaffTimerRedditExample.Models
         {
             DateStarted = DateTime.Now;
             TimerActive = true;
+
+            //Call RaiseCanExecuteChanged to enable or disable the Start and Stop buttons appropriately
             StartTimerCommand.RaiseCanExecuteChanged();
             StopTimerCommand.RaiseCanExecuteChanged();
         }
@@ -45,6 +47,7 @@ namespace StaffTimerRedditExample.Models
 
         private bool CanStartTimer()
         {
+            //Used to enable or disable the Start button - only enable if the timer is NOT currently running
             return TimerActive == false;
         }
 
@@ -57,6 +60,7 @@ namespace StaffTimerRedditExample.Models
 
         private bool CanStopTimer()
         {
+            //Used to enable or disable the Stop button - only enable if the timer is currently running
             return TimerActive;
         }
 
